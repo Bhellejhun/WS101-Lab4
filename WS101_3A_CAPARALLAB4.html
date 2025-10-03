@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bid Handler Demo</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f4f4; }
+        h1 { color: #333; text-align: center; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; background: white; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #4CAF50; color: white; }
+        button { background-color: #4CAF50; color: white; padding: 10px 15px; margin: 5px; border: none; cursor: pointer; border-radius: 4px; }
+        button:hover { background-color: #45a049; }
+        #results { background: white; padding: 15px; margin-top: 10px; border-radius: 4px; }
+        .async-status { color: #007BFF; font-style: italic; }
+    </style>
+</head>
+<body>
+    <h1>Bid Handler Demo</h1>
+    <p class="async-status" id="status">Simulating async bid fetching... New bids arrive every 5 seconds.</p>
+    
+    <table id="bidsTable">
+        <thead>
+            <tr>
+                <th>Bidder</th>
+                <th>Item</th>
+                <th>Amount (₱)</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody id="bidsBody"></tbody>
+    </table>
+
+    <button onclick="showHighestPerItem()">Highest Bid Per Item</button>
+    <button onclick="showFilteredBids()">Filter Bids > ₱100</button>
+    <button onclick="showTotalAmount()">Total Amount</button>
+    <button onclick="showGroupedBids()">Group By Item</button>
+
+    <div id="results"></div>
+
+    <script>
+        // Bid class (JS equivalent of Java)
+        class Bid {
+            constructor(bidderName, item, amount, time) {
+                this.bidderName = bidderName;
+                this.item = item;
+                this.amount = amount;
+                this.time = time;
+            }
+        }
+
+        // Sample initial bids - Updated with 2025 and times from 11:30 AM onwards
+        let allBids = [
+            new Bid("Bhellejhun", "Laptop", 500, "2025-10-01 11:30"),
+            new Bid("Ralph", "Laptop", 600, "2025-10-01 12:00"),
+            new Bid("Keanu", "Phone", 300, "2025-10-01 12:30"),
+            new Bid("Paolo", "Phone", 400, "2025-10-01 13:00"),
+            new Bid("Sean", "Laptop", 700, "2025-10-01 13:30"),
+            new Bid("Allen", "Tablet", 200, "2025-10-01 14:00")
+        ];
+
+        // Render bids table (with ₱ and no commas)
+        function renderBids() {
+            const tbody = document.getElementById('bidsBody');
+            tbody.innerHTML = '';
+            allBids.forEach(bid => {
+                const row = tbody.insertRow();
+                row.insertCell(0).textContent = bid.bidderName;
+                row.insertCell(1).textContent = bid.item;
+                row.insertCell(2).textContent = '₱' + bid.amount.toFixed(2); // No commas
+                row.insertCell(3).textContent = bid.time;
+            });
+        }
+
+        // 1. Highest bid per item
+        function highestBidPerItem(bids) {
+            const grouped = {};
+            bids.forEach(bid => {
+                if (!grouped[bid.item] || bid.amount > grouped[bid.item].amount) {
+                    grouped[bid.item] = bid;
+                }
+            });
+            return Object.fromEntries(Object.entries(grouped).map(([item, bid]) => [item, bid.amount]));
+        }
+
+        // 2. Filter above threshold
+        function filterAboveThreshold(bids, threshold) {
+            return bids.filter(bid => bid.amount > threshold);
+        }
+
+        // 3. Total amount
+        function totalAmount(bids) {
+            return bids.reduce((sum, bid) => sum + bid.amount, 0);
+        }
+
+        // 4. Group by item
+        function groupByItem(bids) {
+            return bids.reduce((groups, bid) => {
+                if (!groups[bid.item]) groups[bid.item] = [];
+                groups[bid.item].push(bid);
+                return groups;
+            }, {});
+        }
+
+        // UI Functions (updated with ₱ and no commas)
+        function showHighestPerItem() {
+            const result = highestBidPerItem(allBids);
+            let html = '<h3>Highest Bid Per Item:</h3><ul>';
+            for (const [item, amount] of Object.entries(result)) {
+                html += `<li>${item}: ₱${amount.toFixed(2)}</li>`; // No commas
+            }
+            html += '</ul>';
+            document.getElementById('results').innerHTML = html;
+        }
+
+        function showFilteredBids() {
+            const filtered = filterAboveThreshold(allBids, 100);
+            const summary = filtered.map(b => `${b.bidderName}: ₱${b.amount.toFixed(2)} for ${b.item}`).join('<br>'); // No commas
+            document.getElementById('results').innerHTML = '<h3>Bids > ₱100:</h3>' + summary;
+        }
+
+        function showTotalAmount() {
+            const total = totalAmount(allBids);
+            document.getElementById('results').innerHTML = '<h3>Total Amount Bidded:</h3>₱' + total.toFixed(2); // No commas
+        }
+
+        function showGroupedBids() {
+            const grouped = groupByItem(allBids);
+            let html = '<h3>Grouped By Item:</h3>';
+            for (const [item, bids] of Object.entries(grouped)) {
+                html += `<strong>${item}:</strong><br>`;
+                bids.forEach(bid => {
+                    html += `  - ${bid.bidderName}: ₱${bid.amount.toFixed(2)} (${bid.time})<br>`; // No commas
+                });
+                html += '<br>';
+            }
+            document.getElementById('results').innerHTML = html;
+        }
+
+        // Simulate async fetching new bids (every 5 seconds, with remaining capitalized names)
+        function simulateAsyncFetch() {
+            const asyncBidders = ['Alpio', 'Adie', 'Menard', 'Khristher', 'Jiro', 'Mark']; // Remaining names from list
+            let bidderIndex = 0;
+            setInterval(() => {
+                const items = ['Laptop', 'Phone', 'Tablet'];
+                const bidder = asyncBidders[bidderIndex % asyncBidders.length]; // Cycle through remaining names
+                bidderIndex++;
+                const newBid = new Bid(
+                    bidder,
+                    items[Math.floor(Math.random() * items.length)],
+                    Math.random() * 1000 + 50, // Random amount ₱50-₱1050
+                    new Date().toISOString().slice(0, 16).replace('T', ' ') // Dynamic time (onwards from initial)
+                );
+                allBids.push(newBid);
+                renderBids();
+                document.getElementById('status').textContent = `New bid added: ${newBid.bidderName} bid ₱${newBid.amount.toFixed(2)} on ${newBid.item}`; // No commas
+            }, 5000);
+        }
+
+        // Initialize
+        renderBids();
+        simulateAsyncFetch();
+    </script>
+</body>
+</html>
