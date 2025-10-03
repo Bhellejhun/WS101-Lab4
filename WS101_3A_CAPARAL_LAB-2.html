@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bhellejhun Josh Caparal — Resume</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;800&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --accent:#3f3fae;
+      --accent-dark:#2f2f8f;
+      --muted:#6b6b6b;
+      --paper:#f4f4f6;
+      --text:#222;
+      --max-width:900px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: "Roboto", system-ui, Arial;
+      color:var(--text);
+      background: linear-gradient(180deg, #0f0f2b 0%, #0f0f2b 8%, #ffffff 8%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+      min-height:100vh;
+    }
+
+    .resume{
+      width:100%;
+      max-width:var(--max-width);
+      background: white;
+      border-radius:8px;
+      overflow:hidden;
+      box-shadow:0 10px 30px rgba(0,0,0,0.25);
+    }
+
+    /* Header */
+    .header{
+      background: var(--accent);
+      color:white;
+      padding:34px 28px 60px;
+      position:relative;
+      text-align:center;
+    }
+    .name{
+      font-family: "Montserrat", sans-serif;
+      font-weight:800;
+      font-size:34px;
+      letter-spacing:1px;
+      margin:0 0 6px;
+    }
+    .title{
+      margin:0;
+      font-weight:600;
+      opacity:0.95;
+      letter-spacing:0.6px;
+    }
+
+    /* circular photo */
+    .photo-wrap{
+      width:120px;
+      height:120px;
+      border-radius:999px;
+      background:white;
+      padding:6px;
+      position:absolute;
+      left:50%;
+      transform:translateX(-50%);
+      bottom:-60px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow:0 6px 18px rgba(0,0,0,0.15);
+    }
+    .photo{
+      width:100%;
+      height:100%;
+      border-radius:999px;
+      object-fit:cover;
+      display:block;
+    }
+
+    .content{
+      padding:84px 36px 36px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:28px;
+      background:var(--paper);
+    }
+
+    /* left column blocks */
+    .box{
+      background:white;
+      padding:18px;
+      border-radius:6px;
+      margin-bottom:14px;
+      box-shadow: 0 1px 0 rgba(0,0,0,0.03);
+    }
+    h3{
+      margin:0 0 10px;
+      font-family: "Montserrat", sans-serif;
+      font-size:16px;
+      color:var(--accent-dark);
+      letter-spacing:0.6px;
+    }
+
+    .contact{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      font-size:14px;
+      color:var(--muted);
+    }
+    .contact-item{display:flex;gap:8px;align-items:center}
+
+    /* about and awards */
+    .about p{margin:0;color:#444;line-height:1.45;font-size:14px}
+    .awards ul{margin:8px 0 0 18px;padding:0;color:#444}
+    .awards li{margin:6px 0}
+
+    /* skills */
+    .skill{
+      margin:12px 0;
+      font-size:14px;
+    }
+    .skill .bar{
+      height:10px;
+      background:#e6e6e6;
+      border-radius:999px;
+      overflow:hidden;
+      margin-top:6px;
+    }
+    .skill .fill{
+      height:100%;
+      background:linear-gradient(90deg,var(--accent-dark),var(--accent));
+      border-radius:999px;
+      width:0%;
+    }
+    .skill-row{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:#555}
+
+    /* right column */
+    .work-item, .edu-item{
+      margin-bottom:14px;
+    }
+    .job-title{font-weight:700;color:var(--accent-dark);font-size:14px}
+    .company{font-weight:600;color:#222;font-size:13px;margin-bottom:6px}
+    .meta{font-size:13px;color:var(--muted);margin-bottom:8px}
+    .edu-item .degree{font-weight:700;margin-bottom:6px}
+
+    /* footer color strip */
+    .footer-strip{
+      height:18px;
+      background:var(--accent-dark);
+    }
+
+    /* responsive */
+    @media (max-width:800px){
+      .content{grid-template-columns:1fr; padding-top:70px}
+      .photo-wrap{left:calc(50% - 20px)}
+    }
+
+  </style>
+</head>
+<body>
+  <article class="resume" aria-label="Resume of Bhellejhun Josh Caparal">
+    <header class="header">
+      <h1 class="name">Bhellejhun Josh Caparal</h1>
+
+      <div class="photo-wrap" role="img" aria-label="Profile photo">
+        <!-- Replace profile.jpg with your photo file -->
+        <img src="profile.jpg" alt="Profile photo" class="photo" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%23cccccc%22/><text x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-size=%2220%22 fill=%22%23666%22 font-family=Arial>Photo</text></svg>'">
+      </div>
+    </header>
+
+    <section class="content">
+      <!-- LEFT COLUMN -->
+      <div>
+        <div class="box contact">
+          <h3>Contact</h3>
+          <div class="contact-item"><span>Contact:</span><span>09552402730</span></div>
+          <div class="contact-item"><span>Address:</span><span>Laoang, Northern Samar</span></div>
+          <div class="contact-item"><span>Email:</span><span>bhellejhuncaparal@gmail.com</span></div>
+          <div class="contact-item"><span>Website:</span><span>my website.com</span></div>
+        </div>
+
+        <div class="box about">
+          <h3>About Me</h3>
+          <p>My name is Bhellejhun Josh Caparal. I am a dedicated professional web system designer and a pro html user</p>
+        </div>
+
+        <div class="box awards">
+          <h3>Hobbies</h3>
+            <li>Gaming</li>
+            <li>Travelling</li>
+         <li>Scrabble</li>
+         </ul>
+        </div>
+
+        <div class="Games">
+          <h3>Skills</h3>
+
+          <div class="Games">
+            <div class="skill-row"><span>Mobile Legends</span><span>90%</span></div>
+            <div class="bar"><div class="fill" style="width:90%"></div></div>
+          </div>
+
+          <div class="skill">
+            <div class="skill-row"><span>Call of Duty Warzone</span><span>70%</span></div>
+            <div class="bar"><div class="fill" style="width:70%"></div></div>
+          </div>
+
+          <div class="skill">
+            <div class="skill-row"><span>Dota</span><span>85%</span></div>
+            <div class="bar"><div class="fill" style="width:85%"></div></div>
+          </div>
+
+          <div class="skill">
+            <div class="skill-row"><span>League of Legends</span><span>80%</span></div>
+            <div class="bar"><div class="fill" style="width:80%"></div></div>
+          </div>
+
+          <div class="skill">
+            <div class="skill-row"><span>Roblox</span><span>75%</span></div>
+            <div class="bar"><div class="fill" style="width:75%"></div></div>
+          </div>
+
+          <div class="skill">
+            <div class="skill-row"><span>Warrock</span><span>80%</span></div>
+            <div class="bar"><div class="fill" style="width:80%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div>
+        <div class="box work">
+          <h3>Work Experience</h3>
+
+          <div class="work-item">
+            <div class="job-title">Html web designer<span class="meta">| 2010-2020</span></div>
+            <div class="company">Html and co.</div>
+            <div class="meta">A full time deaigner and had 5years experience.</div>
+          </div>
+
+          <div class="work-item">
+            <div class="job-title">Canva Desiger<span class="meta">| 2020-2025</span></div>
+            <div class="company">Canva</div>
+            <div class="meta">A good canva user.</div>
+          </div>
+        </div>
+
+        <div class="box education">
+          <h3>Education</h3>
+
+          <div class="edu-item">
+            <div class="degree">Bachelor of Science in Information Technology 2009-2012 — Master in Programming</div>
+            <div class="meta">Lorem ipsum is simply dummy text of the printing and typesetting industry.</div>
+          </div>
+
+          <div class="edu-item">
+            <div class="degree">Html & CSS Designer 2005-2009 — Specialized in Web Designing</div>
+            <div class="meta">Lorem ipsum is simply dummy text of the printing and typesetting industry.</div>
+          </div>
+
+          <div class="edu-item">
+            <div class="degree">High School 2005-2009 — Colegio De Sta. Teresita</div>
+            <div class="meta">Lorem ipsum is simply dummy text of the printing and typesetting industry.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer-strip" aria-hidden="true"></div>
+  </article>
+</body>
+</html>
