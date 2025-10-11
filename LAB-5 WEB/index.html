@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Todo App — CRUD Example</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container">
+    <h1>Todo List</h1>
+
+    <form id="todoForm" class="todo-form">
+      <input id="todoInput" type="text" placeholder="Enter a new task..." required />
+      <button type="submit" id="addBtn">Add</button>
+    </form>
+
+    <div id="status" class="status"></div>
+
+    <ul id="todoList" class="todo-list"></ul>
+  </main>
+
+  <template id="todoItemTemplate">
+    <li class="todo-item">
+      <span class="todo-text"></span>
+      <div class="todo-actions">
+        <button class="edit-btn">Edit</button>
+        <button class="delete-btn">Delete</button>
+      </div>
+    </li>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>
